@@ -1,9 +1,10 @@
 import { Box, Button, Flex, Grid, Input } from "theme-ui";
-import Title from "../title/title";
+import Title from "../title/title-component";
 import InputComponent from "../input/input-component";
 import iconDollar from "../images/icon-dollar.svg";
-import TitleComponent from "../title/title";
-import TipComponent from "../tip/tip";
+import iconPerson from "../images/icon-person.svg";
+import TitleComponent from "../title/title-component";
+import TipComponent from "../tip/tip-component";
 import CostComponent from "../cost/cost-component";
 
 export default function App() {
@@ -11,61 +12,69 @@ export default function App() {
     <Box
       p={3}
       sx={{
-        backgroundColor: "lightblue",
+        backgroundColor: " hsl(185, 41%, 84%)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
       <Box
-        p={3}
         sx={{
           borderRadius: "10px",
           backgroundColor: "white",
           display: "flex",
           justifyContent: "center",
-          width: "50%",
         }}
       >
         {/*Left Card*/}
-        <Box p={4}>
+        <Box
+          p={4}
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "350px",
+          }}
+        >
           <Box>
             <TitleComponent title="Bill" />
-            <InputComponent inputCost="142.55" />
+            <InputComponent imgSource={iconDollar} inputCost="142.55" />
           </Box>
 
-          <Box>
+          <Box mt={3} mb={3}>
             <TitleComponent title="Select Tip %" />
-            <Grid columns={3} gap={1}>
+            <Grid columns={3} gap={2}>
               <TipComponent tip="5%" />
               <TipComponent tip="10%" />
               <TipComponent tip="15%" />
               <TipComponent tip="25%" />
               <TipComponent tip="50%" />
-              <TipComponent tip="Custom" />
+              <TipComponent tip="75%" />
             </Grid>
           </Box>
 
           <Box>
             <TitleComponent title="Number of People" />
-            <InputComponent inputCost="5" />
+            <InputComponent imgSource={iconPerson} inputCost="5" />
           </Box>
         </Box>
 
         {/*Right card*/}
         <Box
           p={4}
+          m={4}
           sx={{
             backgroundColor: "hsl(183, 100%, 15%)",
             borderRadius: "10px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
+            width: "350px",
           }}
         >
           <Box>
-            <CostComponent title="Tip Amount" cost="13.00" />
-            <CostComponent title="Total" cost="15.00" />
+            <CostComponent title="Tip Amount " cost="$4.27" />
+            <CostComponent title="Total" cost="$32.79" />
           </Box>
 
           <Button
@@ -74,23 +83,10 @@ export default function App() {
               backgroundColor: "hsl(172, 67%, 45%)",
             }}
           >
-            Reset
+            RESET
           </Button>
         </Box>
       </Box>
     </Box>
   );
 }
-
-//<Box
-//           sx={{
-//               display: "flex",
-//               flexDirection: "column",
-//               alignItems: "center",
-//               gap: 2,
-//               mt: 4,
-//           }}
-//       >
-//           <Text>Hello world</Text>
-//           <Button>A button</Button>
-//       </Box>

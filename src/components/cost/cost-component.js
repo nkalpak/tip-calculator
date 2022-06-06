@@ -1,33 +1,47 @@
-import { Box, Flex, Text } from "theme-ui";
+import { Box, Text } from "theme-ui";
 
 export default function CostComponent({ title, cost }) {
   return (
-    <Flex>
-      <Box>
-        <Text
-          sx={{
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          fontSize: "14px",
+        }}
+      >
+        <h4
+          style={{
             color: "white",
+            margin: 0,
           }}
         >
           {title}
-        </Text>
-        <Text
-          sx={{
-            color: "white",
+        </h4>
+        <h5
+          style={{
+            color: "darkgray",
+            margin: 0,
           }}
         >
-          /person
-        </Text>
+          / person
+        </h5>
       </Box>
-      <span
+
+      <h2
         style={{
           color: "hsl(172, 67%, 45%)",
-          fontSize: "24px",
-          padding: "0 25px",
+          fontSize: "35px",
         }}
       >
         {cost}
-      </span>
-    </Flex>
+      </h2>
+    </Box>
   );
 }
