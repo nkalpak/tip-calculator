@@ -7,6 +7,7 @@ import TitleComponent from "../title/title-component";
 import TipComponent from "../tip/tip-component";
 import CostComponent from "../cost/cost-component";
 
+//just checking if the push works
 export default function App() {
   return (
     <Box
