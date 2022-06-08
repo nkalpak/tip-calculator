@@ -1,12 +1,18 @@
 import { Button } from "theme-ui";
 
-export default function TipComponent({ tip }) {
+export default function TipComponent({
+  tip,
+  onClick,
+  onMouseOver,
+  onMouseLeave,
+  style,
+}) {
   return (
     <Button
-      sx={{
-        color: "white",
-        backgroundColor: "hsl(183, 100%, 15%)",
-      }}
+      sx={style}
+      onClick={onClick}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
     >
       {tip}
     </Button>

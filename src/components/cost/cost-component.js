@@ -1,6 +1,11 @@
 import { Box, Text } from "theme-ui";
 
-export default function CostComponent({ title, cost }) {
+export default function CostComponent({
+  price,
+  title,
+  cost,
+  tipAmountPerPerson,
+}) {
   return (
     <Box
       sx={{
@@ -41,6 +46,7 @@ export default function CostComponent({ title, cost }) {
         }}
       >
         {cost}
+        {price}
       </h2>
     </Box>
   );
