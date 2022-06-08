@@ -1,7 +1,7 @@
 import { Button } from "theme-ui";
 
 export default function TipComponent({
-  tip,
+  currentTip,
   onClick,
   onMouseOver,
   onMouseLeave,
@@ -14,7 +14,7 @@ export default function TipComponent({
       onMouseOver={onMouseOver}
       onMouseLeave={onMouseLeave}
     >
-      {tip}
+      {currentTip}
     </Button>
   );
 }

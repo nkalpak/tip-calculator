@@ -1,7 +1,13 @@
 import { Box, Input } from "theme-ui";
 import iconDollar from "../images/icon-dollar.svg";
 
-export default function InputComponent({ onClick, imageSource, onInput }) {
+export default function InputComponent({
+  imageSource,
+  onInput,
+  sx,
+  onMouseOver,
+  onMouseLeave,
+}) {
   return (
     <Box
       sx={{
@@ -10,18 +16,18 @@ export default function InputComponent({ onClick, imageSource, onInput }) {
         alignItems: "center",
         borderRadius: "5px",
       }}
-      onClick={onClick}
       onInput={onInput}
+      onMouseOver={onMouseOver}
+      onMouseLeave={onMouseLeave}
     >
       {/*<img src={imgSource} alt="dollar image" />*/}
       <Input
         sx={{
-          color: "hsl(183, 100%, 15%)",
           fontWeight: "700",
           backgroundImage: { imageSource },
           backgroundSize: "200px",
           backgroundColor: "hsl(189, 41%, 97%)",
-          borderStyle: "transparent",
+          ...sx,
         }}
         defaultValue={0}
       />

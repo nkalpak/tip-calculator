@@ -1,53 +1,50 @@
-import { Box, Text } from "theme-ui";
+import { Box, Label } from "theme-ui";
 
-export default function CostComponent({
-  price,
-  title,
-  cost,
-  tipAmountPerPerson,
-}) {
+export default function CostComponent({ price, title, cost }) {
   return (
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
         justifyContent: "space-between",
       }}
     >
       <Box
         sx={{
+          fontSize: "14px",
           display: "flex",
           flexDirection: "column",
-          fontSize: "14px",
         }}
       >
-        <h4
-          style={{
+        <Label
+          sx={{
             color: "white",
             margin: 0,
+            width: "150px",
           }}
         >
           {title}
-        </h4>
-        <h5
-          style={{
+        </Label>
+        <Label
+          sx={{
             color: "darkgray",
             margin: 0,
+            width: "150px",
           }}
         >
           / person
-        </h5>
+        </Label>
       </Box>
 
-      <h2
-        style={{
+      <Label
+        sx={{
           color: "hsl(172, 67%, 45%)",
           fontSize: "35px",
+          marginLeft: "200px",
         }}
       >
         {cost}
         {price}
-      </h2>
+      </Label>
     </Box>
   );
 }
