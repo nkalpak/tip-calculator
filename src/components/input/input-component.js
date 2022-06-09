@@ -1,85 +1,38 @@
-import { Box, Input } from "theme-ui";
-import iconDollar from "../images/icon-dollar.svg";
+import { Box, IconButton, Image, Input } from "theme-ui";
 
 export default function InputComponent({
-  imageSource,
-  onInput,
-  sx,
   onMouseOver,
   onMouseLeave,
+  sx,
+  onInput,
+  icon,
 }) {
+  // const [bill, setBill] = useState(0);
+  // const [numberOfPeople, setNumberOfPeople] = useState(0);
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        borderRadius: "5px",
       }}
-      onInput={onInput}
-      onMouseOver={onMouseOver}
-      onMouseLeave={onMouseLeave}
     >
-      {/*<img src={imgSource} alt="dollar image" />*/}
+      <Image src={icon} sx={{ marginRight: "10px" }}></Image>
       <Input
         sx={{
           fontWeight: "700",
-          backgroundImage: { imageSource },
           backgroundSize: "200px",
           backgroundColor: "hsl(189, 41%, 97%)",
           ...sx,
         }}
         defaultValue={0}
+        onInput={onInput}
+        onMouseOver={onMouseOver}
+        onMouseLeave={onMouseLeave}
       />
     </Box>
   );
 }
 
-//ne moze ova dole vaka, slikata nemozam da ja stavam vo Input
-//<Box
-//       sx={{
-//         display: "flex",
-//         justifyContent: "space-between",
-//         alignItems: "center",
-//         backgroundColor: "hsl(189, 41%, 97%)",
-//         padding: "10px 15px",
-//         borderRadius: "5px",
-//         fontWeight: "700",
-//       }}
-//       onClick={onClick}
-//     >
-//       <img src={imgSource} alt="dollar image" />
-//       <Input
-//         sx={{
-//           color: "hsl(183, 100%, 15%)",
-//           fontWeight: "700",
-//           width: "70px",
-//           borderStyle: "none",
-//         }}
-//         defaultValue={inputCost}
-//       />
-//     </Box>
-
-//prethodnoto reshenie
-//   <Box
-//       sx={{
-//         display: "flex",
-//         justifyContent: "space-between",
-//         alignItems: "center",
-//         backgroundColor: "hsl(189, 41%, 97%)",
-//         padding: "10px 15px",
-//         borderRadius: "5px",
-//       }}
-//       onClick={onClick}
-//     >
-//       <img src={imgSource} alt="dollar image" />
-//       <h4
-//         style={{
-//           color: "hsl(183, 100%, 15%)",
-//           margin: "0",
-//           fontSize: "20px",
-//         }}
-//       >
-//         {inputCost}
-//       </h4>
-//     </Box>
+//in order for the icon to be inside the input, I have to have a div component and in it put the icon as an image
+//and the text as h3 or something similar. IconButton doesn't have a source, and in Input, you can't put other components

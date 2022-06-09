@@ -1,7 +1,7 @@
 import { theme } from "../../lib/theme-ui";
 import { Label } from "theme-ui";
 
-export default function TitleComponent({ title, numberOfPeople }) {
+export default function TitleComponent({ children, checkValue }) {
   return (
     <Label
       sx={{
@@ -9,10 +9,10 @@ export default function TitleComponent({ title, numberOfPeople }) {
         fontSize: "16px",
         fontFamily: "Space Mono",
         fontWeight: "700",
-        marginBottom: "5px",
+        marginBottom: "7px",
       }}
     >
-      {title}
+      {children}
     </Label>
   );
 }

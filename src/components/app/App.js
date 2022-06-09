@@ -1,11 +1,13 @@
 import { Box, Button, Grid } from "theme-ui";
-import InputComponent from "../input/input-component";
 import iconDollar from "../images/icon-dollar.svg";
 import iconPerson from "../images/icon-person.svg";
 import TitleComponent from "../title/title-component";
 import TipComponent from "../tip/tip-component";
 import CostComponent from "../cost/cost-component";
 import { useState } from "react";
+import TitleInputComponent from "../title-input-component/title-input-component";
+
+//check Strict Mode for if the components are ok
 
 export default function App() {
   //  function for saving the bill and numberOfPeople input, and the selected tip
@@ -16,15 +18,12 @@ export default function App() {
   const [tipAmount, setTipAmount] = useState(0);
   const [total, setTotal] = useState(0);
 
-  const integerBill = parseInt(bill);
-  const integerSelectedTip = parseInt(selectedTip);
-  const integerNumberOfPeople = parseInt(numberOfPeople);
+  const integerBill = parseFloat(bill);
+  const integerSelectedTip = parseFloat(selectedTip);
+  const integerNumberOfPeople = parseFloat(numberOfPeople);
 
   //  hover style for the button
-  const [hoverButtonAndTip, setHoverButtonAndTip] = useState(false);
-
-  // hover style for the input bill
-  const [hoverInputBill, setHoverInputBill] = useState(false);
+  const [hoverButton, setHoverButton] = useState(false);
 
   //default style for reset button and clicked tip button
   const [buttonsStyle, setButtonsStyle] = useState(false);
@@ -35,17 +34,16 @@ export default function App() {
   {
     tipComponents = tips.map((tip) => {
       return (
-        <TipComponent
+        <TipComponent //nz kako da napravam sekoe poedinechno da ima efekt
           key={tip}
-          style={{
-            backgroundColor: hoverButtonAndTip
-              ? "#9FE8DF"
-              : "hsl(183, 100%, 15%)",
+          sx={{
+            backgroundColor: buttonsStyle ? "#9FE8DF" : "hsl(183, 100%, 15%)",
             // backgroundColor: buttonsStyle treba da e ovoj stil za clicked, ama nez kako
             //   ? "#26C2AE"
             //   : "hsl(183, 100%, 15%)",
-            color: hoverButtonAndTip ? "#00474B" : "white",
-            cursor: hoverButtonAndTip ? "pointer" : null,
+            color: buttonsStyle ? "#00474B" : "white",
+            cursor: buttonsStyle ? "pointer" : null,
+            fontSize: "20px",
           }}
           currentTip={tip}
           onClick={() => {
@@ -53,10 +51,10 @@ export default function App() {
             setButtonsStyle(true);
           }}
           onMouseOver={() => {
-            setHoverButtonAndTip(true);
+            setButtonsStyle(true);
           }}
           onMouseLeave={() => {
-            setHoverButtonAndTip(false);
+            setButtonsStyle(false);
           }}
         />
       );
@@ -65,7 +63,7 @@ export default function App() {
 
   return (
     <Box
-      p={3}
+      p={5}
       sx={{
         backgroundColor: "hsl(185, 41%, 84%)",
         display: "flex",
@@ -74,6 +72,7 @@ export default function App() {
       }}
     >
       <Box
+        p={4}
         sx={{
           borderRadius: "10px",
           backgroundColor: "white",
@@ -83,94 +82,43 @@ export default function App() {
       >
         {/*Left Card*/}
         <Box
-          p={4}
           sx={{
             display: "flex",
             flexDirection: "column",
             justifyContent: "space-between",
-            width: "350px",
+            width: "300px",
+            marginRight: "40px",
           }}
         >
-          <Box>
-            <TitleComponent title="Bill" />
-            <InputComponent
-              sx={{
-                color: hoverInputBill ? "#26C2AE" : "#00474B",
-                cursor: hoverInputBill ? "pointer" : null,
-              }}
-              imgSource={iconDollar}
-              onInput={(e) => {
-                setBill(e.target.value);
-              }}
-              onMouseOver={() => {
-                setHoverInputBill(true);
-              }}
-              onMouseLeave={() => {
-                setHoverInputBill(false);
-              }}
-            />
-          </Box>
+          <TitleInputComponent
+            title="Bill"
+            iconSource={iconDollar}
+            onInput={(e) => {
+              setBill(e.target.value);
+            }}
+            value={bill}
+          />
 
           <Box mt={3} mb={3}>
-            <TitleComponent title="Select Tip %" />
+            <TitleComponent>Select Tip %</TitleComponent>
             <Grid columns={3} gap={2}>
               {tipComponents}
-              {/*{tips.map((tip) => {*/}
-              {/*  return (*/}
-              {/*    <TipComponent*/}
-              {/*      key={tip}*/}
-              {/*      style={{*/}
-              {/*        backgroundColor: hoverButtonAndTip*/}
-              {/*          ? "#9FE8DF"*/}
-              {/*          : "hsl(183, 100%, 15%)",*/}
-              {/*        // backgroundColor: buttonsStyle treba da e ovoj stil za clicked, ama nez kako*/}
-              {/*        //   ? "#26C2AE"*/}
-              {/*        //   : "hsl(183, 100%, 15%)",*/}
-              {/*        color: hoverButtonAndTip ? "#00474B" : "white",*/}
-              {/*        cursor: hoverButtonAndTip ? "pointer" : null,*/}
-              {/*      }}*/}
-              {/*      currentTip={tip}*/}
-              {/*      onClick={() => {*/}
-              {/*        setSelectedTip(parseInt(tip));*/}
-              {/*        setButtonsStyle(true);*/}
-              {/*      }}*/}
-              {/*      onMouseOver={() => {*/}
-              {/*        setHoverButtonAndTip(true);*/}
-              {/*      }}*/}
-              {/*      onMouseLeave={() => {*/}
-              {/*        setHoverButtonAndTip(false);*/}
-              {/*      }}*/}
-              {/*    />*/}
-              {/*  );*/}
-              {/*})}*/}
             </Grid>
           </Box>
 
-          <Box>
-            <TitleComponent title="Number of People" />
-            <InputComponent
-              sx={{
-                color: hoverInputBill ? "#26C2AE" : "#00474B",
-                cursor: hoverInputBill ? "pointer" : null,
-              }}
-              imgSource={iconPerson}
-              onInput={(e) => {
-                setNumberOfPeople(e.target.value);
-              }}
-              onMouseOver={() => {
-                setHoverInputBill(true);
-              }}
-              onMouseLeave={() => {
-                setHoverInputBill(false);
-              }}
-            />
-          </Box>
+          <TitleInputComponent
+            title="Number of People"
+            iconSource={iconPerson}
+            onInput={(e) => {
+              setNumberOfPeople(e.target.value);
+            }}
+            value={numberOfPeople}
+          />
         </Box>
 
         {/*Right card*/}
         <Box
           p={4}
-          m={4}
           sx={{
             backgroundColor: "hsl(183, 100%, 15%)",
             borderRadius: "10px",
@@ -181,15 +129,19 @@ export default function App() {
           }}
         >
           <Box>
-            <CostComponent price={0} title="Tip Amount " cost="$" />
-            <CostComponent price={0} title="Total" cost="$" />
+            <CostComponent price={tipAmount} cost="$">
+              Tip Amount
+            </CostComponent>
+            <CostComponent price={total} cost="$">
+              Total
+            </CostComponent>
           </Box>
 
           <Button
             sx={{
               color: "#00474B",
-              backgroundColor: hoverButtonAndTip ? "#9FE8DF" : "#26C2AE",
-              cursor: hoverButtonAndTip ? "pointer" : null,
+              backgroundColor: hoverButton ? "#9FE8DF" : "#26C2AE",
+              cursor: hoverButton ? "pointer" : null,
               textTransform: "uppercase",
             }}
             onClick={() => {
@@ -197,10 +149,10 @@ export default function App() {
               setTotal(0);
             }}
             onMouseOver={() => {
-              setHoverButtonAndTip(true);
+              setHoverButton(true);
             }}
             onMouseLeave={() => {
-              setHoverButtonAndTip(false);
+              setHoverButton(false);
             }}
           >
             Reset

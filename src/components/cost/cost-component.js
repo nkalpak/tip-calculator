@@ -1,11 +1,12 @@
 import { Box, Label } from "theme-ui";
 
-export default function CostComponent({ price, title, cost }) {
+export default function CostComponent({ children, price, cost }) {
   return (
     <Box
       sx={{
         display: "flex",
-        justifyContent: "space-between",
+        alignItems: "center",
+        margin: "20px 0",
       }}
     >
       <Box
@@ -22,7 +23,7 @@ export default function CostComponent({ price, title, cost }) {
             width: "150px",
           }}
         >
-          {title}
+          {children}
         </Label>
         <Label
           sx={{
@@ -38,7 +39,7 @@ export default function CostComponent({ price, title, cost }) {
       <Label
         sx={{
           color: "hsl(172, 67%, 45%)",
-          fontSize: "35px",
+          fontSize: "40px",
           marginLeft: "200px",
         }}
       >
