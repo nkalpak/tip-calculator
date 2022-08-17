@@ -39,8 +39,8 @@ export default function CostComponent({ children, price, cost }) {
       <Label
         sx={{
           color: "hsl(172, 67%, 45%)",
-          fontSize: "40px",
-          marginLeft: "200px",
+          fontSize: "20px",
+          marginLeft: "150px",
         }}
       >
         {cost}
