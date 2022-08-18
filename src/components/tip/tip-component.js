@@ -1,4 +1,4 @@
-import { Box, Button } from "theme-ui";
+import { Button } from "theme-ui";
 
 export default function TipComponent({
   currentTip,
@@ -18,12 +18,3 @@ export default function TipComponent({
     </Button>
   );
 }
-
-//za input, site funkcii ne bea staveni vo <Input/> tuku vo <Box> nad input
-// <Box
-//       onClick={onClick}
-//       onMouseOver={onMouseOver}
-//       onMouseLeave={onMouseLeave}
-//     >
-//       <Button sx={sx}>{currentTip}</Button>
-//     </Box>

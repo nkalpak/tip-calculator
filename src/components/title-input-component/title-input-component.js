@@ -1,43 +1,49 @@
 import TitleComponent from "../title/title-component";
 import InputComponent from "../input/input-component";
-import { Box, Label } from "theme-ui";
-import { useState } from "react";
+import {Box, Label} from "theme-ui";
 
 export default function TitleInputComponent({
-  title,
-  iconSource,
-  onInput,
-  value,
-  checkValue,
-}) {
-  const [hoverInput, setHoverInput] = useState(false);
+                                                title,
+                                                iconSource,
+                                                onInput,
+                                                value,
+                                            }) {
 
-  let bill = 0;
-  let numberOfPeople = 0;
-  {
-    title === "Bill" ? (bill = value) : (numberOfPeople = value);
-  }
+    return (
+        <>
+            {parseInt(value) === 0 || value === "" ?
+                (
+                    <Box sx={{}}>
+                        <Box sx={{
+                            display: "flex"
+                        }}>
+                            <TitleComponent>{title}</TitleComponent>
+                            <Label sx={{color: "#E17052", fontSize: "14px", marginLeft: "20px"}}>Can't be zero</Label>
+                        </Box>
 
-  return (
-    <Box sx={{ margin: "10px 0" }}>
-      <TitleComponent>{title}</TitleComponent>
-      {checkValue === 0 ? (
-        <Label sx={{ color: "#E17052" }}>Can't be zero</Label>
-      ) : null}
-      <InputComponent
-        sx={{
-          color: hoverInput ? "#26C2AE" : "#00474B",
-          cursor: hoverInput ? "pointer" : "null",
-        }}
-        icon={iconSource}
-        onMouseOver={() => {
-          setHoverInput(true);
-        }}
-        onMouseLeave={() => {
-          setHoverInput(false);
-        }}
-        onInput={onInput}
-      />
-    </Box>
-  );
+                        <InputComponent
+                            sx={{
+                                color: "#E17052",
+                            }}
+                            icon={iconSource}
+                            onInput={onInput}
+
+                        />
+                    </Box>
+                ) : (
+                    <Box>
+                        <TitleComponent>{title}</TitleComponent>
+                        <InputComponent
+                            sx={{
+                                color: "#00474B"
+                            }}
+                            icon={iconSource}
+                            onInput={onInput}
+                        />
+                    </Box>
+                )
+
+            }
+        </>
+    )
 }

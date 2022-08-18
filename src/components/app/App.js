@@ -9,25 +9,24 @@ import TitleInputComponent from "../title-input-component/title-input-component"
 
 export default function App() {
 
+    //inputs for calculations
     let [bill, setBill] = useState(0);
     let [selectedTip, setSelectedTip] = useState(0);
     let [numberOfPeople, setNumberOfPeople] = useState(0);
 
+//calculations for the calculator
+    let tipInDecimal = selectedTip / 100;
+    let totalPerPerson = ((bill / numberOfPeople) * (1 + tipInDecimal)).toFixed(2);
+    let totalTip = bill * tipInDecimal;
+    let tipPerPerson = (totalTip / numberOfPeople).toFixed(2);
 
-    let tipInDecimal = parseInt(selectedTip) / 100;
-    let totalPerPerson = ((parseInt(bill) / parseInt(numberOfPeople)) * (1 + tipInDecimal)).toFixed(2);
-    let totalTip = parseInt(bill) * tipInDecimal;
-    let tipPerPerson = (totalTip / parseInt(numberOfPeople)).toFixed(2);
+//check if the Reset button is clicked so the calculations can be set to 0
+    const [clickButton, setClickedButton] = useState(false);
 
-    //default style for the clicked tip buttons
-    const [hoverButton, setHoverButton] = useState(false);
-
-    const [tipPerPersonState, setTipPerPersonState] = useState(tipPerPerson);
-    const [totalPerPersonState, setTotalPerPersonState] = useState(totalPerPerson);
-
-    //going through all tip components
+//array of tip components
     const tips = ["5%", "10%", "15%", "25%", "50%", "70%"];
 
+//used for checking the selected tip component and changing the style
     const [clickId, setClickedId] = useState(null);
 
     let tipComponents;
@@ -38,18 +37,22 @@ export default function App() {
                 <TipComponent
                     key={tip}
                     sx={{
-                        //   ? "#26C2AE"
-                        //   : "hsl(183, 100%, 15%)",
-                        backgroundColor: clickId === index ? "#9FE8DF" : "hsl(183, 100%, 15%)",
+                        backgroundColor: clickId === index ? "#26C2AE" : "#00474B",
                         color: clickId === index ? "#00474B" : "white",
-                        cursor: "pointer",
                         fontSize: "20px",
+                        "&:hover": {
+                            cursor: "pointer",
+                            backgroundColor: "#9FE8DF",
+                            color: "#00474B"
+                        }
                     }}
                     currentTip={tip}
                     onClick={() => {
                         setSelectedTip(parseInt(tip));
                         setClickedId(index);
+                        setClickedButton(false);
                     }}
+
                 />
             )
         });
@@ -62,7 +65,7 @@ export default function App() {
                 backgroundColor: "hsl(185, 41%, 84%)",
                 display: "flex",
                 justifyContent: "center",
-                alignItems: "center",
+                alignItems: "center"
             }}
         >
             <Box
@@ -125,10 +128,10 @@ export default function App() {
                     }}
                 >
                     <Box>
-                        <CostComponent price={tipPerPerson} cost="$">
+                        <CostComponent price={clickButton ? 0 : tipPerPerson} cost="$">
                             Tip Amount
                         </CostComponent>
-                        <CostComponent price={totalPerPerson} cost="$">
+                        <CostComponent price={clickButton ? 0 : totalPerPerson} cost="$">
                             Total
                         </CostComponent>
                     </Box>
@@ -136,17 +139,12 @@ export default function App() {
                     <Button
                         sx={{
                             color: "#00474B",
-                            backgroundColor: hoverButton ? "#9FE8DF" : "#26C2AE",
-                            cursor: "pointer",
-                            textTransform: "uppercase"
-                        }}
-                        onMouseOver={() => {
-                            setHoverButton(true);
-                        }}
-                        onMouseLeave={() => {
-                            setHoverButton(false);
+                            textTransform: "uppercase",
+                            backgroundColor: "#26C2AE",
+                            cursor: "pointer"
                         }}
                         onClick={() => {
+                            setClickedButton(true);
                         }}
                     >
                         Reset
@@ -155,4 +153,5 @@ export default function App() {
             </Box>
         </Box>
     );
+
 }
